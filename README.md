@@ -15,3 +15,9 @@ Untuk menjalankan server dan klien, kita dapat melakukan _step-step_ berikut:
 4. Pada 3 terminal lainnya, jalankan klien dengan mengetik `cargo run --bin client`.
 
 Ketika sebuah pesan diketik dan dikirim melalui klien, server akan menerima pesan tersebut, lalu mencetaknya dan menyiarkan pesan tersebut ke semua klien. Semua klien kemudian akan menerima pesan tersebut dan mencetaknya ke terminal.
+
+## Modifying Port
+
+![Second Image](./images/second-image.jpg)
+
+Untuk mengubah port pada server, saya perlu mengubah nomor port `TCPListener` di file server.rs. Saya juga perlu mengubah nomor port di file client.rs agar sesuai dengan nomor port server. Protokol _websocket_ pada sisi server sendiri tidak dinyatakan secara eksplisit. Pada kode server, port di-_bind_ ke `TCPListener` yang menugaskan sebuah proses untuk mendengarkan koneksi TCP yang melewati port tersebut. Setelah koneksi dibuat, server kemudian membuat _socket_ yang kemudian diberikan ke _websocket handler_. Jadi, server tidak sepenuhnya mendeklarasikan protokol _websocket_ tersebut secara eksplisit, tetapi mengimplementasikan spesifikasi protokol _websocket_ melalui _crate_ `tokio-websocket`.
